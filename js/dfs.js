@@ -213,8 +213,10 @@ function createGraphDisplay() {
             $(
                 go.Shape,
                 "ellipse",
-                { fill: "white", desiredSize: new go.Size(45, 45) },
-                new go.Binding("fill", "color")
+                { fill: "white", desiredSize: new go.Size(45, 45)},
+                new go.Binding("fill", "color"),
+                new go.Binding("stroke","stroke"),
+                new go.Binding("strokeWidth","strokeW"),
             ),
             $(
                 go.TextBlock,
@@ -262,7 +264,7 @@ function createNodeDataArray() {
     let arr = new Array();
     for (let i = 0; i < values.length; i++) {
         arr.push(
-            { key: values[i] }
+            { key: values[i]}
         )
     }
     return arr;
@@ -453,7 +455,7 @@ async function runAnimation(){
 
             document.getElementById("desc").innerHTML += "<span style='color:yellow'>Visited Node " + currentNode.name + " (Pushed to Stack)</span></br>";
             document.getElementById("visited").innerHTML += currentNode.name + " -> ";
-            displayStack(tempStack);
+            displayStack(tempStack,tempNodeList);
             paintGraph(currentNode,tempNodeList);
             await sleep(speed);
         }
@@ -462,7 +464,7 @@ async function runAnimation(){
             tempStack.pop();
             document.getElementById("desc").innerHTML += "<span>Popped Node From Stack " + popedNode.name +"</span></br>";
 
-            displayStack(tempStack);
+            displayStack(tempStack,tempNodeList);
             await sleep(speed);
         }
     }
@@ -478,9 +480,29 @@ function paintLine(node, neighbors, color) {
     });
 }
 
-function displayStack(stack){
+function displayStack(stack,tempNodeList){
     document.getElementById("stack").innerHTML = "-";
 
+    //En üstteki node'u al. Onu Göster, ziyaret edilmeyen komşuları boya
+    let top = stack[stack.length-1];
+    tempNodeList.forEach(node => {
+        let nodeG = diagram.findNodeForKey(node.name);
+        if(node == top){
+            diagram.model.commit(function (m) {
+                m.set(nodeG.data, "stroke", "red");
+            }, "change stroke");
+            diagram.model.commit(function (m) {
+                m.set(nodeG.data, "strokeW", 3);
+            }, "change strokeWidth");
+        }else{
+            diagram.model.commit(function (m) {
+                m.set(nodeG.data, "stroke", null);
+            }, "change stroke");
+            diagram.model.commit(function (m) {
+                m.set(nodeG.data, "strokeW", null);
+            }, "change strokeWidth");
+        }
+    });
     for(let i = stack.length - 1 ; i >= 0 ; i--){
         element = stack[i];
         if (i == stack.length - 1) document.getElementById("stack").innerHTML += ">" + element.name + "</br>";
@@ -514,15 +536,6 @@ function paintGraph(current,nodeList) {
 
 
 /**Kullanılacak */
-function paintLines(node){
-    //Bütün linkleri beyaza boya
-
-    node.neighbors.forEach(element => {
-        if(!element.isVisited){
-            //Linki Sarı-yeşile Boya
-        }
-    });
-}
 
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
