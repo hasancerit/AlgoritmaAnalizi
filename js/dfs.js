@@ -157,6 +157,7 @@ function clickMatrix() {
     createNodes();
     createGraphDisplay();
     resetSimulation();
+    document.getElementById("startVertex").value = "";
 
 }
 
@@ -315,7 +316,6 @@ function clickRunDfs() {
     resetSimulation();
     let startVertexS = document.getElementById("startVertex").value;
     let node = findNodeByName(startVertexS);
-    console.log(startVertexS);
    
     DFS(node);          //DFS Basladi
     //Animasyon Fonksiyonu;
