@@ -457,7 +457,7 @@ async function runAnimation(){
 
         if(isPoped){
             tempStack.pop();
-            document.getElementById("desc").innerHTML += "<span>Popped Node From Stack " + popedNode.name +"</span>";
+            document.getElementById("desc").innerHTML += "<span>Popped Node From Stack " + popedNode.name +"</span></br>";
 
             displayStack(tempStack);
             await sleep(1000);
