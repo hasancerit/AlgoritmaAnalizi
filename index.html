@@ -152,6 +152,12 @@
                                 placeholder="Start" style="max-width:50px;display: inline;">
                             <button id="startDsf" class="btn-sm btn btn-primary"" onclick=" clickRunDfs()"> Start DFS
                             </button>
+                            <div class="mt-1 mr-1 ml-4"> 
+                                <span>Animation Speed:</span>
+                            </div>
+                            <div class="slidecontainer mt-1">
+                                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                              </div>
                         </div>
                     </div>
                     <div class="col-md-3" style="max-height: 500px;height: 500px;">
@@ -191,7 +197,6 @@
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
 
     <script src="js/site/release/go-debug.js"></script>
     <script src="js/raphael-2.3.0/raphael.min.js"></script>

@@ -333,6 +333,8 @@ function resetSimulation() {
     document.getElementById("desc").innerHTML = "";
     document.getElementById("visited").innerHTML = "";
     document.getElementById("stack").innerHTML = "";
+    document.getElementById("myRange").value = 50;
+    speed = 1500;
 }
 
 
@@ -416,6 +418,7 @@ function findNodeByName(name) {
 
 
 /**Animasyon */
+let speed;
 async function runAnimation(){
     let tempStack = new Array();
 
@@ -452,7 +455,7 @@ async function runAnimation(){
             document.getElementById("visited").innerHTML += currentNode.name + " -> ";
             displayStack(tempStack);
             paintGraph(currentNode,tempNodeList);
-            await sleep(1000);
+            await sleep(speed);
         }
 
         if(isPoped){
@@ -460,7 +463,7 @@ async function runAnimation(){
             document.getElementById("desc").innerHTML += "<span>Popped Node From Stack " + popedNode.name +"</span></br>";
 
             displayStack(tempStack);
-            await sleep(1000);
+            await sleep(speed);
         }
     }
 
@@ -550,4 +553,33 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+}
+
+
+var slider = document.getElementById("myRange");
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+    let val = this.value;
+    if(val<=10){
+        speed = 4000;
+    }else if(val <=20){
+        speed = 3000;
+    }else if(val <=30){
+        speed = 2500;
+    }else if(val <=40){
+        speed = 2000;
+    }else if(val <=50){
+        speed = 1500;
+    }else if(val <=60){
+        speed = 1750;
+    }else if(val <=70){
+        speed = 1500;
+    }else if(val <=80){
+        speed = 1000;
+    }else if(val <=90){
+        speed = 500;
+    }else{
+        speed = 200;
+    }
 }
