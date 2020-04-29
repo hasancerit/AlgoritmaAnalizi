@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS
+    <script src="https://use.fontawesome.com/6d1c1fbed9.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="css/all.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+    <title>Golden Website</title>
+</head>
+
+<body>
+
+    <div style="position: fixed;top: 10px;right: 10px; ">
+        <button id="myBtn" type="button" class="btn btn-sm btn-primary">Algorithmic Complexity ve Pseudo Code </button>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" style="color: black;">&times;</span>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="images/alg.png" width="500px" height="500px">
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <section id="generateGraph">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 text-center mt-3 ml-2">
+                    <button onclick="randomGraph()" type="button" class="btn btn-secondary">Generate Random
+                        Graph</button>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-md-6 text-center mt-3 ml-2">
+                    <h6><i>Or Create A Custom Graph</i></h6>
+                </div>
+            </div>
+    </section>
+
+    <section id="init">
+        <section id="numbernodes">
+            <div class="container-fluid">
+                <div class="row mt-3">
+                    <div class="col-md-10">
+                        <div class="form-group row ">
+                            <label for="example-number-input" class="col-auto col-form-label"> Value Set:</label>
+                            <div class="col-6 align-self-start pl-0 ml-0 ">
+                                <input class="form-control" id="valueset">
+                            </div>
+                            <div class="align-self-start col-1 pl-0">
+                                <button type="button" class="btn btn-primary"" onclick=" clickValueSet()">Okay</button>
+                            </div>
+                            <p style="font-size: 11px;"><i>
+                                    *Enter the elements with "," between them.<br>
+                                    *The array size must be 2-15<br>
+                                    *The array elements must be unique<br>
+                                    *Any array elements connot be empty<br>
+                                    *Each array element length must be 1<br>
+                                    Example : A,B,C,D,E,F</i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="adjacencymatrix" class="mt-4" style="display: none;">
+            <div class="row ml-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radios" id="direct" value="direct"
+                        onchange="changeRadios()" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        Direct
+                    </label>
+                </div>
+
+                <div class="form-check ml-2">
+                    <input class="form-check-input" type="radio" name="radios" id="indirect" onchange="changeRadios()"
+                        value="indirect">
+                    <label class="form-check-label" for="exampleRadios2">
+                        Indirect
+                    </label>
+                </div>
+            </div>
+
+            <div class="row ml-2">
+                <div class="col-auto" id="matrixdiv">
+                    <div class="form-group row">
+                        <label for="example-number-input" class="col-auto col-form-label"> Adjacency Matrix:</label>
+                        <div id="grid-container">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto form-group">
+                    <button type="button" id="matrixbutton" class="btn-sm btn btn-primary""
+                        onclick=" clickMatrix()"> Okay </button>
+                </div>
+            </div>
+            </div>
+        </section>
+    </section>
+
+    <section id="simulation" class="mt-2 mb-0 pb-0" style="display: none;">
+        <section id="graph">
+            <div class="container-fluid">
+                <div class="row text-center mt-2">
+                    <div class="col-md-3 align-self-end">
+                    <span class="circle " style="background-color: white;"></span>
+                    <span style="font-size: 10px;">Unvisited Node</span>
+
+                    <span class="circle ml-2" style="background-color: yellow;"></span>
+                    <span style="font-size: 10px;">Visited Node</span>
+
+                    <span class="circle ml-2" style="background-color: red;"></span>
+                    <span style="font-size: 10px;">Last visited Node</span>
+                        
+                    </div>
+
+                    <div class="col-md-6 text-center align-self-centers">
+                        <h6 id="info">
+
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-auto">
+                        <div id="myDiagramDiv" style="width:900px; height:500px; background-color: #242424;"></div>
+
+                        <div class="row justify-content-center" style="margin-top: 5px;">
+                            <input id="startVertex" class="form-control form-control-sm mr-3" type="text"
+                                placeholder="Start" style="max-width:50px;display: inline;">
+                            <button id="startDsf" class="btn-sm btn btn-primary"" onclick=" clickRunDfs()"> Start DFS
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="max-height: 500px;height: 500px;">
+                        <div id="desc" class="row pl-1 infobox-x mb-1"
+                            style="height:55%;border-style: groove groove groove groove ;">
+                        </div>
+
+                        <div class="row pl-1 infobox text-center mb-1"
+                            style="height: 15%;max-height: 15%; border-style: groove; ">
+                            <div class="mb-1 col-12 h-50"
+                                style="height: 10px !important; max-height: 10px !important; ">
+                                <h6>Visited</h6>
+                            </div>
+
+                            <div class="col-12 h-50" id="visited">
+
+                            </div>
+                        </div>
+                        <div class="row infobox-a text-center mb-1"
+                            style="height: 30%; border-style: groove groove groove groove;">
+                            <div class="col-12 h-25" style="height: 10px !important; max-height: 10px !important; ">
+                                <h6>Stack</h6>
+                            </div>
+
+                            <div class="col-12 h-75">
+                                <p id="stack">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src="js/site/release/go-debug.js"></script>
+    <script src="js/raphael-2.3.0/raphael.min.js"></script>
+    <script src="js/flowchart-latest.js"></script>
+    <script src="js/dracula.min.js"></script>
+
+    <script src="js/dfs.js"></script>
+ 
+</body>
+
+</html>
